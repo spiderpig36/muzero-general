@@ -1,4 +1,4 @@
-import compiler_envs
+from compiler_envs.wrappers.log_wrapper import LogWrapper
 from compiler_envs.compiler.gcc import CompilerGCC
 import gymnasium as gym
 import datetime
@@ -139,6 +139,8 @@ class Game(AbstractGame):
 
     def __init__(self, seed=None, log=True):
         self.env = gym.make("compiler_env/CompilerEnv-v0")
+        if log:
+            self.env = LogWrapper(self.env)
 
     def step(self, action):
         """
